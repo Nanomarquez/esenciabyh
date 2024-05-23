@@ -67,6 +67,7 @@ function FormCalculadora({
               name="porcientoEsencia"
               defaultValue={0}
               aria-label="Small"
+              max={50}
               value={data.porcientoEsencia}
               onChange={(_e, value) =>
                 onSliderChange("porcientoEsencia", value)
@@ -81,6 +82,7 @@ function FormCalculadora({
               <span>{data.porcientoEndurecedor}%</span>
             </Box>
             <Slider
+              max={50}
               id="%esencia"
               size="small"
               name="porcientoEndurecedor"
