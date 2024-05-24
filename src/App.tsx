@@ -5,6 +5,8 @@ import FormCalculadora from "./components/FormCalculadora";
 import ResultGramo from "./components/ResultGramo";
 import ResultKilo from "./components/ResultKilo";
 import { CalcProps, DataProps } from "./types";
+import SimpleBackdrop from "./components/Dialog";
+import { Slideshow } from "./components/Slide";
 
 const App: React.FC = () => {
   const [data, setData] = React.useState<DataProps>({
@@ -43,6 +45,7 @@ const App: React.FC = () => {
 
   return (
     <main>
+      <SimpleBackdrop></SimpleBackdrop>
       <Navbar />
       <section>
         <FormCalculadora
