@@ -1,17 +1,11 @@
-import * as React from "react";
 import Backdrop from "@mui/material/Backdrop";
 import { Slideshow } from "./Slide";
-import { Box, Button, Theme, useMediaQuery } from "@mui/material";
+import { Box, Theme, useMediaQuery } from "@mui/material";
 import Close from "../assets/close.svg";
-export default function SimpleBackdrop() {
-  const [open, setOpen] = React.useState(true);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
+export default function SimpleBackdrop({
+  open,
+  handleClose,
+}: Readonly<{ open: boolean; handleClose: () => void }>) {
   const isMobile = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("md")
   );
@@ -29,8 +23,11 @@ export default function SimpleBackdrop() {
           position: "relative",
         }}
       >
-        <Box className="absolute z-50 right-16 top-16">
-            <img src={Close} alt="close" />
+        <Box
+          onClick={handleClose}
+          className="absolute z-50 right-16 top-16 cursor-pointer"
+        >
+          <img src={Close} alt="close" />
         </Box>
         <Slideshow></Slideshow>
       </Box>

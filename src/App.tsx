@@ -1,73 +1,22 @@
-// src/App.tsx
-import React from "react";
-import Navbar from "./components/Navbar";
-import FormCalculadora from "./components/FormCalculadora";
-import ResultGramo from "./components/ResultGramo";
-import ResultKilo from "./components/ResultKilo";
-import { CalcProps, DataProps } from "./types";
-import SimpleBackdrop from "./components/Dialog";
-import { Slideshow } from "./components/Slide";
+import { Routes, Route } from "react-router-dom";
+import AuthLayout from "./auth/AuthLayout";
+import { Toaster } from "./components/ui/toaster";
+import SignupForm from "./auth/forms/SignupForm";
+import SigninForm from "./auth/forms/SigninForm";
 
-const App: React.FC = () => {
-  const [data, setData] = React.useState<DataProps>({
-    gramosPorCadaVela: 0,
-    cantidadDeVelas: 0,
-    porcientoEsencia: 0,
-    porcientoEndurecedor: 0,
-  });
-
-  const [calcGramos, setCalcGramos] = React.useState<CalcProps>({
-    cantidadCera: 0.0,
-    esencia: 0.0,
-    endurecedor: 0.0,
-  });
-
-  const [calcKg, setCalcKg] = React.useState<CalcProps>({
-    cantidadCera: 0.0,
-    esencia: 0.0,
-    endurecedor: 0.0,
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSliderChange = (name: string, value: number | number[]) => {
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value as number,
-    }));
-  };
-
+function App() {
   return (
-    <main>
-      <SimpleBackdrop></SimpleBackdrop>
-      <Navbar />
-      <section>
-        <FormCalculadora
-          data={data}
-          onChange={handleChange}
-          onSliderChange={handleSliderChange}
-        />
-        <ResultGramo
-          data={data}
-          calcGramos={calcGramos}
-          calcKg={calcKg}
-          setCalcGramos={setCalcGramos}
-        />
-        <ResultKilo
-          data={data}
-          calcKg={calcKg}
-          setCalcKg={setCalcKg}
-          calcGramos={calcGramos}
-        />
-      </section>
+    <main className="flex h-screen">
+      <Routes>
+        {/* Public Routes */}
+        <Route element={<AuthLayout />}>
+          <Route path="/sign-in" element={<SigninForm />} />
+          <Route path="/sign-up" element={<SignupForm />} />
+        </Route>
+      </Routes>
+      <Toaster />
     </main>
   );
-};
+}
 
 export default App;
