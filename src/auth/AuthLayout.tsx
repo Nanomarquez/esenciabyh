@@ -1,18 +1,18 @@
-import { Outlet , Navigate } from "react-router-dom";
-function AuthLayout() {
+import { useUserContext } from "@/context/UserContext";
+import { Outlet, Navigate } from "react-router-dom";
+import BannerCO from "../assets/CO0A0535.jpg";
 
-  const isAuth = false;
+function AuthLayout() {
+  const { isAuth } = useUserContext();
 
   return (
     <>
       {isAuth ? (
-        <Navigate to="/"/>
+        <Navigate to="/" />
       ) : (
-        <>
-          <section className="flex flex-1 justify-center items-center flex-col bg-[#e7b1b1]">
-            <Outlet/>
-          </section>
-        </>
+        <section className="flex flex-1 justify-center items-center flex-col" style={{ backgroundImage: `url(${BannerCO})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}>
+          <Outlet />
+        </section>
       )}
     </>
   );

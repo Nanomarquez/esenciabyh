@@ -13,7 +13,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { SigninValidation } from "@/lib/validation";
-import Loader from "@/components/shared/Loader";
+import { Loader } from "@/components/shared";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignInAccount } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/UserContext";
@@ -78,7 +78,7 @@ function SigninForm() {
 
   return (
     <Form {...form}>
-      <div className="sm:w-420 flex-center flex-col bg-white p-5 rounded-md shadow-md w-[90vw]">
+      <div className="sm:w-420 flex-center flex-col bg-white/60 p-5 rounded-md shadow-md w-[90vw]">
         <h1 className="text-xl">
           Esencia<span className="font-bold">B&H</span>{" "}
         </h1>
@@ -136,7 +136,7 @@ function SigninForm() {
           <Button type="submit" className="shad-button_primary">
             {isUserLoading || isPending ? (
               <div className="flex-center gap-2">
-                <Loader /> Loading...
+                <Loader /> Cargando...
               </div>
             ) : (
               "Ingresar"

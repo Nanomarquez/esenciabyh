@@ -32,7 +32,7 @@ export type INewUser = {
   name: string;
   email: string;
   lastname: string;
-  phone: string;
+  phone?: string;
   password: string;
 };
 

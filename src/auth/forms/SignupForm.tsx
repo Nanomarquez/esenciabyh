@@ -76,14 +76,14 @@ function SignupForm() {
 
   const [seePassword, setSeePassword] = useState(false);
 
-  const Required = () => (
-    <span className="text-destructive text-xl">*</span>
-  )
+  const Required = () => <span className="text-destructive text-xl">*</span>;
 
   return (
     <Form {...form}>
-      <div className="sm:w-420 flex-center flex-col bg-white p-5 rounded-md shadow-md w-[90vw]">
-        <h1 className="text-xl">Esencia<span className="font-bold">B&H</span> </h1>
+      <div className="sm:w-420 flex-center flex-col bg-white/60 p-5 rounded-md shadow-md w-[90vw]">
+        <h1 className="text-xl">
+          Esencia<span className="font-bold">B&H</span>{" "}
+        </h1>
         <p className="text-light-3 small-medium md:base-regular mt-2 text-center">
           Para continuar, por favor ingrese los detalles de su cuenta.
         </p>
@@ -96,7 +96,9 @@ function SignupForm() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nombre <Required/></FormLabel>
+                <FormLabel>
+                  Nombre <Required />
+                </FormLabel>
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
@@ -109,7 +111,9 @@ function SignupForm() {
             name="lastname"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Apellido <Required/></FormLabel>
+                <FormLabel>
+                  Apellido <Required />
+                </FormLabel>
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
@@ -147,7 +151,9 @@ function SignupForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email <Required/></FormLabel>
+                <FormLabel>
+                  Email <Required />
+                </FormLabel>
                 <FormControl>
                   <Input type="email" className="shad-input" {...field} />
                 </FormControl>
@@ -160,7 +166,9 @@ function SignupForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Contraseña <Required/></FormLabel>
+                <FormLabel>
+                  Contraseña <Required />
+                </FormLabel>
                 <div className="flex items-center">
                   <FormControl>
                     <Input
@@ -169,7 +177,10 @@ function SignupForm() {
                       {...field}
                     />
                   </FormControl>
-                  <button type="button" onClick={() => setSeePassword(!seePassword)}>
+                  <button
+                    type="button"
+                    onClick={() => setSeePassword(!seePassword)}
+                  >
                     <img
                       src={`/icons/${
                         seePassword ? "eye-out-white" : "eye-white"
@@ -184,7 +195,7 @@ function SignupForm() {
             )}
           />
           <Button type="submit" className="shad-button_primary mt-2">
-            {isCreatingAccount ? (
+            {isCreatingAccount || isUserLoading || isSignin ? (
               <div className="flex-center gap-2">
                 <Loader /> Cargando...
               </div>
