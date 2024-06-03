@@ -1,6 +1,5 @@
 import { Bottombar, Topbar } from "@/components/shared";
 import { useUserContext } from "@/context/UserContext";
-import { useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 function RootLayout() {

@@ -28,7 +28,7 @@ function ResultKilo({ data, calcKg, setCalcKg, calcGramos }: Readonly<ResultKilo
       <h1 className="text-2xl font-semibold text-center text-neutral-600">
         CÁLCULO PARA EL LOTE EN KILOGRAMOS
       </h1>
-      <Box py={4} px={10} display={"flex"} flexDirection={"column"} gap={4}>
+      <Box py={4} pb={16} px={10} display={"flex"} flexDirection={"column"} gap={4}>
         <Box
           display={"flex"}
           flexDirection={{ xs: "column", md: "row" }}

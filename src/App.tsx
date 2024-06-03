@@ -5,6 +5,8 @@ import SignupForm from "./auth/forms/SignupForm";
 import SigninForm from "./auth/forms/SigninForm";
 import RootLayout from "./root/RootLayout";
 import Home from "./root/pages/Home";
+import Calculadora from "./root/pages/Calculadora";
+import Perfil from "./root/pages/Perfil";
 
 function App() {
   
@@ -19,6 +21,8 @@ function App() {
         {/* Private Routes */}
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
+          <Route path="/calculadora" element={<Calculadora />} />
+          <Route path="/perfil" element={<Perfil />} />
         </Route>
       </Routes>
       <Toaster />
