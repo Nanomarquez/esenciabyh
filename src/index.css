@@ -347,7 +347,7 @@
 
   /* Button */
   .shad-button_primary {
-    @apply bg-[#e48a8a] hover:bg-[#E8ABAB] focus:bg-[#E8ABAB] text-light-1 flex gap-2 !important;
+    @apply bg-[#e48a8a] hover:bg-[#E8ABAB] focus:bg-[#E8ABAB] text-light-1 flex gap-2 shadow-md !important;
   }
 
   .shad-button_dark_4 {

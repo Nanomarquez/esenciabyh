@@ -63,8 +63,6 @@ function SigninForm() {
         });
       }
     } catch (error) {
-      console.log(error);
-      console.error(error);
       if (error instanceof Error || error instanceof AppwriteException) {
         return toast({
           title: error.message,
@@ -78,11 +76,11 @@ function SigninForm() {
 
   return (
     <Form {...form}>
-      <div className="sm:w-420 flex-center flex-col bg-white/60 p-5 rounded-md shadow-md w-[90vw]">
-        <h1 className="text-xl">
+      <div className="sm:w-420 flex-col bg-white/60 p-5 rounded-md shadow-md w-[90vw]">
+        <h1 className="text-xl text-center">
           Esencia<span className="font-bold">B&H</span>{" "}
         </h1>
-        <p className="text-light-3 small-medium md:base-regular mt-2">
+        <p className="text-light-3 text-center small-medium md:base-regular mt-2">
           Bienvenido! Por favor, ingrese su información
         </p>
         <form

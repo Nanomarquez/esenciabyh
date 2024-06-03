@@ -1,5 +1,5 @@
 import { Box, TextField } from "@mui/material";
-import { CalcProps, DataProps } from "../types";
+import { CalcProps, DataProps } from "../../types";
 import React from "react";
 
 type ResultKiloProps = {

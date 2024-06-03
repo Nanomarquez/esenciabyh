@@ -24,6 +24,7 @@ export type IUser = {
   lastname: string;
   email: string;
   imageUrl: string;
+  imageId: string;
   phone: string;
   new: boolean;
 };
@@ -39,10 +40,15 @@ export type INewUser = {
 export type IUpdateUser = {
   userId: string;
   name: string;
-  bio: string;
+  lastname: string;
+  email: string;
+  phone?: string;
+  password: string;
+  newPassword?: string;
   imageId: string;
   imageUrl: URL | string;
   file: File[];
+  emailChange: boolean;
 };
 
 export type IContextType = {

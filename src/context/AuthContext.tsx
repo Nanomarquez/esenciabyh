@@ -10,6 +10,7 @@ const INITIAL_USER = {
   email: "",
   phone: "",
   imageUrl: "",
+  imageId: "",
   new: false,
 };
 
@@ -38,10 +39,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser({
           id: currentAccount.$id,
           name: currentAccount.name,
-          lastname: currentAccount.username,
+          lastname: currentAccount.lastname,
           email: currentAccount.email,
           imageUrl: currentAccount.imageUrl,
-          phone: currentAccount.bio,
+          imageId: currentAccount.imageId,
+          phone: currentAccount.phone,
           new: currentAccount.new,
         });
         setIsAuth(true);

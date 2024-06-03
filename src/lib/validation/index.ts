@@ -21,8 +21,10 @@ export const UpdateProfileValidation = z.object({
   lastname: z.string().min(2, {message: "Demasiado corto"}).max(50, {message: "Demasiado largo"}),
   email: z.string().email({message: "Email invalido"}),
   password: z.string().min(8, {message: "Contraseña debe tener al menos 8 caracteres"}),
+  newPassword: z.string().optional().refine(val => val === undefined || val === "" || val.length >= 8, { message: "Contraseña debe tener al menos 8 caracteres" }),
   phone: z.string()
     .optional()
     .refine(val => 
-      val === undefined || val === "" || val.length >= 10, { message: "El telefono debe tener 10 caracteres minimo" })
+      val === undefined || val === "" || val.length >= 10, { message: "El telefono debe tener 10 caracteres minimo" }),
+  file: z.custom<File[]>()
 });

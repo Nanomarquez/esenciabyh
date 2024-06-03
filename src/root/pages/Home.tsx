@@ -1,6 +1,5 @@
 import { Slideshow } from "@/components/shared/Slide";
 import { Box } from "@mui/material";
-import React from "react";
 
 function Home() {
   return (

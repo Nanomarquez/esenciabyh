@@ -1,6 +1,6 @@
 import TextField from "@mui/material/TextField";
 import { Box, Slider } from "@mui/material";
-import { FormCalculadoraProps } from "../types";
+import { FormCalculadoraProps } from "../../types";
 
 function FormCalculadora({
   data,

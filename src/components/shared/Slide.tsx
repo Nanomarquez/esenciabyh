@@ -1,6 +1,5 @@
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-import { useState } from "react";
 import BannerBlends from "../../assets/Banner-Blends-2-scaled.jpg";
 import BannerMoldes from "../../assets/Banner-moldes-velas-scaled.jpg";
 import BannerJabones from "../../assets/Banner-Jabones-scaled.jpg";
@@ -8,7 +7,6 @@ import BannerEsencias from "../../assets/Banner-esencias-gourmet2.jpg";
 import BannerCO from "../../assets/CO0A0535.jpg";
 
 export const Slideshow = () => {
-  const [current, setCurrent] = useState(0);
 
   const slides = [
     {
@@ -27,7 +25,7 @@ export const Slideshow = () => {
           <h2 className="text-white text-5xl font-extrabold">
             Los aromas más exclusivos
           </h2>
-          <button className="bg-white p-3 font-semibold">VER MÁS</button>
+          <a className="bg-white p-3 font-semibold" href="https://www.esenciabodyandhome.com.ar/product-category/esencias-puras-2/esencias-blends/">VER MÁS</a>
         </div>
       ),
     },
@@ -47,9 +45,9 @@ export const Slideshow = () => {
             <p className="dancing-script">Moldes para que hagas</p>
             <p className="poppins font-black">velas increíbles</p>
           </div>
-          <button className="bg-[#E8ABAB] text-white p-3 font-semibold rounded-md shadow-md">
+          <a href="https://www.esenciabodyandhome.com.ar/product-category/moldes-para-velas/" className="bg-[#E8ABAB] text-white p-3 font-semibold rounded-md shadow-md">
             VER MÁS
-          </button>
+          </a>
         </div>
       ),
     },
@@ -71,9 +69,9 @@ export const Slideshow = () => {
               Moldes para lograr jabones únicos y atractivos.
             </p>
           </div>
-          <button className="bg-[#b7d8bd] text-white p-3 font-semibold rounded-md shadow-md">
+          <a href="https://www.esenciabodyandhome.com.ar/product-category/todo-jabones/moldes-silicona/" className="bg-[#b7d8bd] text-white p-3 font-semibold rounded-md shadow-md">
             VER MÁS
-          </button>
+          </a>
         </div>
       ),
     },
@@ -93,9 +91,9 @@ export const Slideshow = () => {
             <p className="poppins font-black">ESENCIAS GOURMET</p>
             <p className="poppins font-black">Para creaciones exquisitas</p>
           </div>
-          <button className="bg-black/60 text-white p-3 font-semibold rounded-md shadow-md">
+          <a href="https://www.esenciabodyandhome.com.ar/product-category/esencias-gourmet/" className="bg-black/60 text-white p-3 font-semibold rounded-md shadow-md">
             VER MÁS
-          </button>
+          </a>
         </div>
       ),
     },
@@ -115,9 +113,9 @@ export const Slideshow = () => {
             <p className="poppins">¿Estás listo para crear?</p>
             <p className="poppins">¡Comencemos a hacerlo juntos!</p>
           </div>
-          <button className="bg-white/30 text-black/70 p-3 font-semibold rounded-md shadow-md">
+          <a href="https://www.esenciabodyandhome.com.ar/tienda/" className="bg-white/30 text-black/70 p-3 font-semibold rounded-md shadow-md">
             VER MÁS
-          </button>
+          </a>
         </div>
       ),
     },
@@ -142,10 +140,7 @@ export const Slideshow = () => {
       >
         &#10095;
       </button>
-    ),
-    onChange: (_previous: number, next: number) => {
-      setCurrent(next);
-    },
+    )
   };
 
   return (
