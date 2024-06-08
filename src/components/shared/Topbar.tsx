@@ -30,7 +30,7 @@ function Topbar() {
   }, [isSuccess, navigate]);
 
   return (
-    <section className={`topbar`}>
+    <section className={`topbar z-[9999999999]`}>
       <div className="flex-between py-4 px-5">
         <Link to="/" className="flex gap-3 items-center">
           <img
@@ -61,7 +61,7 @@ function Topbar() {
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/paso-a-paso")}>
                   <Keyboard className="mr-2 h-4 w-4" />
                   <span>Paso a paso</span>
                 </DropdownMenuItem>
@@ -69,7 +69,7 @@ function Topbar() {
                   <CreditCard className="mr-2 h-4 w-4" />
                   <span>Presupuesto y Carrito</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/solucionador")}>
                   <Settings className="mr-2 h-4 w-4" />
                   <span>Solucionador de problemas</span>
                 </DropdownMenuItem>

@@ -5,7 +5,7 @@ function Bottombar() {
   const { pathname } = useLocation();
 
   return (
-    <section className="bottom-bar">
+    <section className="bottom-bar z-[9999999999]">
       {bottombarLinks?.map((list) => (
         <Link
           to={list.route}

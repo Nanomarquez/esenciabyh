@@ -10,9 +10,8 @@ function RootLayout() {
       {!isAuth ? (
         <Navigate to="/sign-in" />
       ) : (
-        <div className="w-full">
+        <div className="w-full relative">
           <Topbar/>
-          {/* <LeftSidebar /> */}
           <section
             className="flex flex-1 h-full"
           >

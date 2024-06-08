@@ -268,7 +268,7 @@
 
   /* Bottom bar */
   .bottom-bar {
-    @apply z-50 flex-between w-full fixed bottom-0 rounded-t-[20px] bg-dark-2 px-5 py-4;
+    @apply flex-between w-full fixed bottom-0 rounded-t-[20px] bg-dark-2 px-5 py-4;
   }
 
   /* File uploader */
@@ -317,7 +317,7 @@
 
   /* Topbar */
   .topbar {
-    @apply fixed top-0 z-50 bg-black w-full;
+    @apply fixed top-0 bg-black w-full;
   }
 
   /* User card */
@@ -367,4 +367,63 @@ input[type="number"]::-webkit-inner-spin-button {
 
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+#lista5 {
+  counter-reset: li; 
+  list-style: none; 
+  list-style: decimal; 
+  font: 15px 'trebuchet MS', 'lucida sans';
+  padding: 0;
+  text-shadow: 0 1px 0 #E8ABAB;
+  margin-top: 25px !important;
+}
+
+#lista5 ol {
+  margin: 0 0 0 2em; 
+}
+
+#lista5 {
+  list-style-type: none;
+  list-style-type: decimal;
+   
+  margin: 0;
+  margin-left: 1em;
+  padding: 0;
+   
+  counter-reset: li-counter;
+}
+
+#lista5 > li{
+  position: relative;
+  margin-bottom: 1.5em;
+  padding: 1.5em;
+  background-color: #eaeaea;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #474747;
+}
+
+#lista5 > li:before {
+  position: absolute;
+  top: -0.3em;
+  left: -0.5em;
+  width: 1.8em;
+  height: 1.2em;
+   
+  font-size: 2em;
+  line-height: 1.2;
+  font-weight: bold;
+  text-align: center;
+  color: #000000;
+  background-color: #E8ABAB;
+   
+  transform: rotate(-20deg);
+  -ms-transform: rotate(-20deg);
+  -webkit-transform: rotate(-20deg);
+  z-index: 99;
+  overflow: hidden;
+   
+  content: counter(li-counter);
+  counter-increment: li-counter;
+  box-shadow: 1px 1px 1px #474747;
 }

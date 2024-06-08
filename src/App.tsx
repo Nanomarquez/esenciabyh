@@ -7,6 +7,8 @@ import RootLayout from "./root/RootLayout";
 import Home from "./root/pages/Home";
 import Calculadora from "./root/pages/Calculadora";
 import Perfil from "./root/pages/Perfil";
+import Solucionador from "./root/pages/Solucionador";
+import PasoAPaso from "./root/pages/PasoAPaso";
 
 function App() {
   
@@ -23,6 +25,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/calculadora" element={<Calculadora />} />
           <Route path="/perfil" element={<Perfil />} />
+          <Route path="/solucionador" element={<Solucionador />} />
+          <Route path="/paso-a-paso" element={<PasoAPaso />} />
         </Route>
       </Routes>
       <Toaster />
