@@ -12,53 +12,48 @@ import { Input } from "@/components/ui/input";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { SigninValidation } from "@/lib/validation";
+import { ForgotPasswordValidation } from "@/lib/validation";
 import { Loader } from "@/components/shared";
 import { Link, useNavigate } from "react-router-dom";
-import { useSignInAccount } from "@/lib/react-query/queriesAndMutations";
+import { useForgotPasswordAccount } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/UserContext";
-import { useState } from "react";
 import { AppwriteException } from "appwrite";
 
-function SigninForm() {
+function ForgotPassword() {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
+  const { isLoading: isUserLoading } = useUserContext();
 
-  const { mutateAsync: signInAccount, isPending } = useSignInAccount();
+  const { mutateAsync: forgotPasswordAccount, isPending } = useForgotPasswordAccount();
 
   // 1. Define your form.
-  const form = useForm<z.infer<typeof SigninValidation>>({
-    resolver: zodResolver(SigninValidation),
+  const form = useForm<z.infer<typeof ForgotPasswordValidation>>({
+    resolver: zodResolver(ForgotPasswordValidation),
     defaultValues: {
-      email: "",
-      password: "",
+      email: ""
     },
   });
 
   // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof SigninValidation>) {
+  async function onSubmit(values: z.infer<typeof ForgotPasswordValidation>) {
     try {
-      const session = await signInAccount({
-        email: values.email,
-        password: values.password,
+      const forgotPassword = await forgotPasswordAccount({
+        email: values.email
       });
-      if (!session) {
+      if (!forgotPassword) {
         return toast({
-          title: `Error al iniciar sesión. Por favor, inténtelo de nuevo.`,
+          title: `Error al intentar restablecer la contraseña. Por favor, inténtelo de nuevo.`,
           variant: "destructive",
         });
       }
 
-      const isLoggedIn = await checkAuthUser();
-
-      if (isLoggedIn) {
+      if (forgotPassword) {
         form.reset();
-        navigate("/");
-        toast({ title: "Ingreso exitoso", variant: "success" });
+        toast({ title: "Email enviado", variant: "success" });
+        navigate("/sign-in");
       } else {
         return toast({
-          title: "Ingreso fallido. Por favor, inténtelo de nuevo.",
+          title: `Error al intentar restablecer la contraseña. Por favor, inténtelo de nuevo.`,
           variant: "destructive",
         });
       }
@@ -72,8 +67,6 @@ function SigninForm() {
     }
   }
 
-  const [seePassword, setSeePassword] = useState(false);
-
   return (
     <Form {...form}>
       <div className="sm:w-420 flex-col bg-white/60 p-5 rounded-md shadow-md w-[90vw]">
@@ -81,7 +74,7 @@ function SigninForm() {
           Esencia<span className="font-bold">B&H</span>{" "}
         </h1>
         <p className="text-light-3 text-center small-medium md:base-regular mt-2">
-          Bienvenido! Por favor, ingrese su información
+          Recuperar contraseña
         </p>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -100,44 +93,13 @@ function SigninForm() {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Contraseña</FormLabel>
-                <div className="flex items-center">
-                  <FormControl>
-                    <Input
-                      type={seePassword ? "text" : "password"}
-                      className="shad-input"
-                      {...field}
-                    />
-                  </FormControl>
-                  <button
-                    type="button"
-                    onClick={() => setSeePassword(!seePassword)}
-                  >
-                    <img
-                      src={`/icons/${
-                        seePassword ? "eye-out-white" : "eye-white"
-                      }.svg`}
-                      className="w-6 h-6 ml-2 cursor-pointer"
-                      alt="eye"
-                    />
-                  </button>
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <Button type="submit" className="shad-button_primary">
             {isUserLoading || isPending ? (
               <div className="flex-center gap-2">
                 <Loader /> Cargando...
               </div>
             ) : (
-              "Ingresar"
+              "Enviar email"
             )}
           </Button>
           <p className="text-sm text-light-4 text-center mt-2">
@@ -149,19 +111,10 @@ function SigninForm() {
               Regístrate
             </Link>
           </p>
-          <p className="text-sm text-light-4 text-center -mt-4">
-            Olvidaste tu contraseña?
-            <Link
-              to="/forgot-password"
-              className="text-primary-600 text-small-semibold ml-1"
-            >
-              Click aquí
-            </Link>
-          </p>
         </form>
       </div>
     </Form>
   );
 }
 
-export default SigninForm;
+export default ForgotPassword;

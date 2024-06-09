@@ -4,10 +4,9 @@ import {
   // useQueryClient,
   // useInfiniteQuery
 } from '@tanstack/react-query';
-import { createUserAccount, signInAccount, signOutAccount, updateUser } from '../appwrite/api';
+import { createUserAccount, signInAccount, signOutAccount, updateUser , forgotPasswordAccount, newPasswordAccount } from '../appwrite/api';
 import { INewUser, IUpdateUser } from '@/types';
 import { QUERY_KEYS } from './queryKeys';
-// import { QUERY_KEYS } from './queryKeys';
 
 export const useCreateUserAccount = () => {
   return useMutation({
@@ -21,6 +20,24 @@ export const useSignInAccount = () => {
       email: string;
       password: string;
     }) => signInAccount(user)
+  })
+}
+
+export const useForgotPasswordAccount = () => {
+  return useMutation({
+    mutationFn: (user: {
+      email: string
+    }) => forgotPasswordAccount(user)
+  })
+}
+
+export const useNewPasswordAccount = () => {
+  return useMutation({
+    mutationFn: (recovery: {
+      password: string,
+      userId: string,
+      secret: string
+    }) => newPasswordAccount(recovery)
   })
 }
 

@@ -12,53 +12,64 @@ import { Input } from "@/components/ui/input";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { SigninValidation } from "@/lib/validation";
+import { NewPasswordValidation } from "@/lib/validation";
 import { Loader } from "@/components/shared";
 import { Link, useNavigate } from "react-router-dom";
-import { useSignInAccount } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/UserContext";
-import { useState } from "react";
 import { AppwriteException } from "appwrite";
+import { useState } from "react";
+import { useNewPasswordAccount } from "@/lib/react-query/queriesAndMutations";
+import { useSearchParams } from "react-router-dom";
 
-function SigninForm() {
+function NewPassword() {
+  const [searchParams] = useSearchParams();
+  const userId = searchParams.get("userId");
+  const secret = searchParams.get("secret");
+  console.log(userId);
+  console.log(secret);
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
+  const { isLoading: isUserLoading } = useUserContext();
 
-  const { mutateAsync: signInAccount, isPending } = useSignInAccount();
+  const { mutateAsync: newPasswordAccount, isPending } =
+    useNewPasswordAccount();
 
   // 1. Define your form.
-  const form = useForm<z.infer<typeof SigninValidation>>({
-    resolver: zodResolver(SigninValidation),
+  const form = useForm<z.infer<typeof NewPasswordValidation>>({
+    resolver: zodResolver(NewPasswordValidation),
     defaultValues: {
-      email: "",
       password: "",
     },
   });
 
   // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof SigninValidation>) {
+  async function onSubmit(values: z.infer<typeof NewPasswordValidation>) {
     try {
-      const session = await signInAccount({
-        email: values.email,
-        password: values.password,
-      });
-      if (!session) {
+      if(!userId || !secret){
         return toast({
-          title: `Error al iniciar sesión. Por favor, inténtelo de nuevo.`,
+          title: "Error al intentar restablecer la contraseña. Por favor, inténtelo de nuevo.",
+          variant: "destructive",
+        });
+      }
+      const newPassword = await newPasswordAccount({
+        password: values.password,
+        userId,
+        secret
+      });
+      if (!newPassword) {
+        return toast({
+          title: `Error al intentar restablecer la contraseña. Por favor, inténtelo de nuevo.`,
           variant: "destructive",
         });
       }
 
-      const isLoggedIn = await checkAuthUser();
-
-      if (isLoggedIn) {
+      if (newPassword) {
         form.reset();
-        navigate("/");
-        toast({ title: "Ingreso exitoso", variant: "success" });
+        navigate("/sign-in");
+        toast({ title: "Cambio de contraseña exitoso", variant: "success" });
       } else {
         return toast({
-          title: "Ingreso fallido. Por favor, inténtelo de nuevo.",
+          title: "Error al intentar restablecer la contraseña. Por favor, inténtelo de nuevo.",
           variant: "destructive",
         });
       }
@@ -81,25 +92,12 @@ function SigninForm() {
           Esencia<span className="font-bold">B&H</span>{" "}
         </h1>
         <p className="text-light-3 text-center small-medium md:base-regular mt-2">
-          Bienvenido! Por favor, ingrese su información
+          Recuperar contraseña
         </p>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col gap-5 w-full mt-4"
         >
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input type="email" className="shad-input" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name="password"
@@ -137,7 +135,7 @@ function SigninForm() {
                 <Loader /> Cargando...
               </div>
             ) : (
-              "Ingresar"
+              "Enviar email"
             )}
           </Button>
           <p className="text-sm text-light-4 text-center mt-2">
@@ -149,19 +147,10 @@ function SigninForm() {
               Regístrate
             </Link>
           </p>
-          <p className="text-sm text-light-4 text-center -mt-4">
-            Olvidaste tu contraseña?
-            <Link
-              to="/forgot-password"
-              className="text-primary-600 text-small-semibold ml-1"
-            >
-              Click aquí
-            </Link>
-          </p>
         </form>
       </div>
     </Form>
   );
 }
 
-export default SigninForm;
+export default NewPassword;
