@@ -9,6 +9,8 @@ import Calculadora from "./root/pages/Calculadora";
 import Perfil from "./root/pages/Perfil";
 import Solucionador from "./root/pages/Solucionador";
 import PasoAPaso from "./root/pages/PasoAPaso";
+import ForgotPassword from "./auth/forms/ForgotPassword";
+import NewPassword from "./auth/forms/NewPassword";
 
 function App() {
   
@@ -19,6 +21,8 @@ function App() {
         <Route element={<AuthLayout />}>
           <Route path="/sign-in" element={<SigninForm />} />
           <Route path="/sign-up" element={<SignupForm />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/new-password" element={<NewPassword />} />
         </Route>
         {/* Private Routes */}
         <Route element={<RootLayout />}>

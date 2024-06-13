@@ -29,6 +29,28 @@ export async function createUserAccount(user: INewUser){
   }
 }
 
+export async function forgotPasswordAccount(user: { email: string }){
+  try {
+    const forgotPassword = await account.createRecovery(user.email,'http://localhost:5173/new-password');
+    if(!forgotPassword) throw Error;
+    return forgotPassword;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+export async function newPasswordAccount(recovery: { password: string , userId: string, secret: string }){
+  try {
+    const forgotPassword = await account.updateRecovery(recovery.userId,recovery.secret,recovery.password);
+    if(!forgotPassword) throw Error;
+    return forgotPassword;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
 export async function saveUserToDB(user: {
   accountId:string;
   email:string;
@@ -51,6 +73,10 @@ export async function saveUserToDB(user: {
     return error;
   }
 }
+
+
+
+const post = await databases.listDocuments()
 
 export async function getCurrentUser() {
   try {
@@ -216,7 +242,7 @@ export function getFilePreview(fileId: string) {
     if (!fileUrl) throw Error;
 
     return fileUrl;
-  } catch (error) {``
+  } catch (error) {
     console.log(error);
   }
 }

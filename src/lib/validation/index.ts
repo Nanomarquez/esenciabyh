@@ -16,6 +16,14 @@ export const SigninValidation = z.object({
   password: z.string().min(8, {message: "Contraseña debe tener al menos 8 caracteres"})
 });
 
+export const ForgotPasswordValidation = z.object({
+  email: z.string().email({message: "Email invalido"})
+});
+
+export const NewPasswordValidation = z.object({
+  password: z.string().min(8, {message: "Contraseña debe tener al menos 8 caracteres"})
+});
+
 export const UpdateProfileValidation = z.object({
   name: z.string().min(2, {message: "Demasiado corto"}).max(50, {message: "Demasiado largo"}),
   lastname: z.string().min(2, {message: "Demasiado corto"}).max(50, {message: "Demasiado largo"}),
