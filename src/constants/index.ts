@@ -39,4 +39,12 @@ export const bottombarLinks = [
     route: "#",
     label: "Foro",
   },
+  {
+    route: "/create-post",
+    label: "Create Post"
+  },
+  {
+    route: "/blog",
+    label: "Blog"
+  },
 ];

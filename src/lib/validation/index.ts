@@ -36,3 +36,12 @@ export const UpdateProfileValidation = z.object({
       val === undefined || val === "" || val.length >= 10, { message: "El telefono debe tener 10 caracteres minimo" }),
   file: z.custom<File[]>()
 });
+
+export const PostValidation = z.object({
+  title: z.string().min(1, "El título es obligatorio"),
+  description: z.string().min(1, "La descripción es obligatoria"),
+  file: z.array(z.instanceof(File)),
+  coverImage: z.instanceof(File),
+  postImages: z.array(z.instanceof(File)),
+  categories: z.array(z.string()).min(1, "Al menos una categoría es obligatoria").max(3, "Máximo 3 categorías"),
+});

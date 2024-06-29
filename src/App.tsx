@@ -11,6 +11,9 @@ import Solucionador from "./root/pages/Solucionador";
 import PasoAPaso from "./root/pages/PasoAPaso";
 import ForgotPassword from "./auth/forms/ForgotPassword";
 import NewPassword from "./auth/forms/NewPassword";
+import CreatePost from "./root/pages/CreatePost";
+import BlogList from "./root/pages/Blog";
+import BlogPostPage from "./root/pages/PostDetail";
 
 function App() {
   
@@ -31,6 +34,9 @@ function App() {
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/solucionador" element={<Solucionador />} />
           <Route path="/paso-a-paso" element={<PasoAPaso />} />
+          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/blog" element={<BlogList />} />
+          <Route path="/blog/post/:id" element={<BlogPostPage/>} />
         </Route>
       </Routes>
       <Toaster />
