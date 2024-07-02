@@ -74,10 +74,6 @@ export async function saveUserToDB(user: {
   }
 }
 
-
-
-const post = await databases.listDocuments()
-
 export async function getCurrentUser() {
   try {
     const currentAccount = await account.get();
